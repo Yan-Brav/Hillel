@@ -1,2 +1,2 @@
-var sex = prompt("Whay is your sex");
-alert("Your sex is " + sex + " Isn't it?");
+var sex = prompt("What is your sex");
+confirm("Your sex is " + sex + " Isn't it?");
