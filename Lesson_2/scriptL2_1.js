@@ -28,3 +28,9 @@ console.log(undefined == false);//false I don't know why
 var x = NaN;
 console.log(x !== x);//true
 console.log(x === x);//false
+console.log("--------------------------");
+var y = .3 - .2;
+var z = .2 - .1;
+console.log(y == z);
+console.log(y == .1);
+console.log(z == .1);
