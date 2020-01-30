@@ -39,8 +39,9 @@
 
 //Task#2 ---------------------------------------------------
 
-//Alert  outputs with help BOM in modal window.
-//Console.log() outputs with help JavaScript in console
+//Alert outputs with help BOM in modal window as a warning to user.
+//Console.log() outputs with help JavaScript in console for debugging to help a developer.
+// User must not see these messages.
 
 //Task#3 ---------------------------------------------------
 
@@ -90,6 +91,7 @@ console.log("a"/5);//NaN
 // 10 && true = true;
 //and in the end  false || true = true;
 console.log(("str" || 5) > 0 || (10 && true));//true
+console.assert(NaN, ["This", 1, "false"]);
 
 
 
