@@ -1,4 +1,4 @@
-// I code generator tomorrow, I hope.
+// I'll code generator tomorrow, I hope.
 // Could you check this code, please.
 var testArray = ['1xEr', '78TTfv', 'x31'];
 var stringFromArray = testArray.join();
