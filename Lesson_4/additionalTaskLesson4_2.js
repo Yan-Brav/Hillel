@@ -4,10 +4,11 @@ var stringSize = parseInt(prompt("Enter required size of string"));
 var numberOfString = parseInt(prompt("Enter required number of strings"));
 var index = 0;
 var randomString = "";
-
 var testArray = [];
-for (var k = 0; k < numberOfString; k++){
-    for (var i = 0; i < stringSize; i++){
+
+console.time("double");
+for (let k = 0; k < numberOfString; k++){
+    for (let i = 0; i < stringSize; i++){
 
         index = Math.floor(Math.random() * alphabeticString.length);
         randomString += alphabeticString[index];
@@ -21,9 +22,9 @@ console.log("---------------------");
 // var testArray = ['1xEr', '78TTfv', 'x31'];
 var stringFromArray = testArray.join();
 
-for (var i = 0; i < stringFromArray.length; i++){
+for (let i = 0; i < stringFromArray.length; i++){
     var newString = "";
-    for (var j = 0; j < stringFromArray.length; j++){
+    for (let j = 0; j < stringFromArray.length; j++){
         if (i === j){
             continue
         }
@@ -36,5 +37,6 @@ for (var i = 0; i < stringFromArray.length; i++){
     }
 }
 testArray = stringFromArray.split(",");
+console.timeEnd("double");
 console.log(testArray);
 alert(testArray);
