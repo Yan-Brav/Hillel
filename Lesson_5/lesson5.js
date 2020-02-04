@@ -1,5 +1,5 @@
 var regLogin = /^[A-Z].*\D\d{2}$/g;
-var regPassword = /^[a-z]{1,5}$/g;
+var regPassword = /^[a-zа-я]{1,5}$/g;
 var login = prompt("Enter your login");
 var password = prompt("Enter your password");
 
