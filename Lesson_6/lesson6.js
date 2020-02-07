@@ -1,6 +1,5 @@
 var gameArray = ["paper", "scissors", "stone"];
 var compTurn = gameArray[Math.floor(Math.random() * gameArray.length)];
-console.log(compTurn);
 var userTurn = prompt("Enter your choice: stone, scissors or paper");
 
 if (userTurn === null){
