@@ -4,11 +4,13 @@ var reg1 = /1/g;
 var reg2 = /2/g;
 var reg3 = /3/g;
 console.log(text);
+console.time("text");
 newText = text.replace(reg1, "one");
 text = newText;
 newText = text.replace(reg2, "two");
 text = newText;
 newText = text.replace(reg3, "three");
 text = newText;
+console.timeEnd("text");
 console.log(text);
 

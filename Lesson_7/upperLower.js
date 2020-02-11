@@ -24,4 +24,3 @@ for (var i = 0; i < arrFromStr.length; i++){
 str = newArrFromStr.join(" ");
 console.log("----------------");
 console.log(str);
-
