@@ -1,4 +1,4 @@
-var str = "I am Yan. Я живу в Днепре, Но не в реке Днепр, but in The City DnEpr";
+var str = "I am Yan. Я жиВу в Днепре, Но нE в реKе Днепр, but in The CiTy DnEpr";
 var arrFromStr = str.split(" ");
 var arrSingleStr = [];
 var newArrFromStr = [];
@@ -14,12 +14,12 @@ for (var i = 0; i < arrFromStr.length; i++){
                     arrSingleStr[k] = arrSingleStr[k].toUpperCase();
                 }
             }
-            newArrFromStr.push(arrSingleStr.join(""));
+            break;
         } else {
-            newArrFromStr.push(arrFromStr[i]);
+            arrSingleStr[j] = arrFromStr[i].charAt(j);
         }
-        break;
     }
+    newArrFromStr.push(arrSingleStr.join(""));
 }
 str = newArrFromStr.join(" ");
 console.log("----------------");
