@@ -1,22 +1,19 @@
-var str = "I am Yan. Я жиВу в Днепре, Но нE в реKе Днепр, but in The CiTy DnEpr";
+var str = "I am Yan. Я жиВу в Днепре, Ho нE в реKе Днепр, but in The CiTy DnEpr";
 var arrFromStr = str.split(" ");
 var arrSingleStr = [];
 var newArrFromStr = [];
+var regUpperCase = /[A-ZА-Я]/;
 console.log(str);
+console.time("Upp");
 for (var i = 0; i < arrFromStr.length; i++){
     arrSingleStr = arrFromStr[i].split("");
-    for (var j = 0; j < arrFromStr[i].length; j++){
-        if (arrFromStr[i].charAt(j) === arrFromStr[i].charAt(j).toUpperCase()){
-            for (var k = 0; k < arrSingleStr.length; k++){
-                if(arrSingleStr[k] === arrSingleStr[k].toUpperCase()){
-                    arrSingleStr[k] = arrSingleStr[k].toLowerCase();
-                } else {
-                    arrSingleStr[k] = arrSingleStr[k].toUpperCase();
-                }
+    if (regUpperCase.test(arrFromStr[i])){
+        for (var j = 0; j < arrSingleStr.length; j++){
+            if (arrSingleStr[j] === arrSingleStr[j].toUpperCase()){
+                arrSingleStr[j] = arrSingleStr[j].toLowerCase();
+            } else {
+                arrSingleStr[j] = arrSingleStr[j].toUpperCase();
             }
-            break;
-        } else {
-            arrSingleStr[j] = arrFromStr[i].charAt(j);
         }
     }
     newArrFromStr.push(arrSingleStr.join(""));
@@ -24,3 +21,4 @@ for (var i = 0; i < arrFromStr.length; i++){
 str = newArrFromStr.join(" ");
 console.log("----------------");
 console.log(str);
+console.timeEnd("Upp");
