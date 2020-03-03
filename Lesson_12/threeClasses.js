@@ -52,13 +52,10 @@ let dog = new Animals("Dog");
 let eagle = new Animals("Eagle", true);
 let crocodile = new Animals("Crocodile");
 //Testing
-console.log(lion.name);
-console.log(cat.name);
 console.log(zoo);
 dog.addToArray();
 console.log(zoo);
 cat.deleteFromArray();
-console.log(zoo);
 console.log(zoo);
 eagle.deleteFromArray();
 crocodile.addToArray();
