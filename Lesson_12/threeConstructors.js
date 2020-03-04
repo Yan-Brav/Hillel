@@ -11,20 +11,20 @@ First.prototype.say = function () {
     console.log("I'm saying")
 };
 Second.prototype = Object.create(First.prototype);
-
+Second.prototype.constructor = Second;
 Second.prototype.run = function () {
     console.log("I can run faster than first");
 };
 Second.prototype.go = function () {
     console.log("I can go longer than first");
 };
-Second.prototype.constructor = Second;
 Third.createObject = function (ConstrName) {
     return new ConstrName();
 };
 let objFirst = new First();
 let objSecond = new Second();
 let objThird = new Third.createObject(Second);
+//Testing
 objFirst.run();
 objSecond.run();
 objSecond.go();

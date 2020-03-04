@@ -3,18 +3,18 @@ class Animals {
     constructor(name, isAddedToArray){
         this.name = name;
         this.addToArrayImmediately = function () {
-            isAddedToArray === true ? zoo.push(this.name) : zoo;
+            (isAddedToArray === true && typeof this.name === "string") ? zoo.push(this.name) : zoo;
             return zoo;
         };
         this.watchObject = new WatchAnimals();
         this.addToArrayImmediately();
     }
-    get getName(){
-        return this.name;
-    }
     addToArray(){
-        this.watchObject.watchCreate(this.name);
-        return zoo.push(this.name);
+        if (typeof this.name === "string"){
+            this.watchObject.watchCreate(this.name);
+            return zoo.push(this.name);
+        }
+        return zoo;
     }
     deleteFromArray(){
         let removeIndex = zoo.indexOf(this.name);
