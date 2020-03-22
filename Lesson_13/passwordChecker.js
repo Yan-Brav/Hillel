@@ -1,7 +1,7 @@
 let password = prompt('Enter your password');
 class PassCheckController {
     static passwordChecker() {
-        let regex = /\w{6,}/g;
+        let regex = /^\w{6,}/g;
         if(regex.test(password)){
             PassCheckView.showCorrectPassword();
         } else {
