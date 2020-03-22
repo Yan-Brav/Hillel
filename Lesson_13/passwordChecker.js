@@ -3,13 +3,13 @@ class PassCheckController {
     static passwordChecker() {
         let regex = /\w{6,}/g;
         if(regex.test(password)){
-            PassCheckModel.showCorrectPassword();
+            PassCheckView.showCorrectPassword();
         } else {
-            PassCheckModel.showIncorrectPassword();
+            PassCheckView.showIncorrectPassword();
         }
     }
 }
-class PassCheckModel {
+class PassCheckView {
     static showCorrectPassword() {
         console.log(password + ' is correct password');
     }
