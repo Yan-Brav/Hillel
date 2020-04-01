@@ -1,0 +1,48 @@
+.required{
+    color: red;
+}
+.grid-container{
+    display: grid;
+    width: 600px;
+    grid-template-columns: auto;
+}
+.grid-item-2{
+    display: grid;
+    grid-template-columns: 100px 250px;
+}
+.grid-item-4{
+    display: inline-grid;
+    grid-template-columns: auto auto auto auto;
+}
+.contact-info{
+    margin: 5px;
+}
+.personal-info{
+    margin: 5px;
+}
+.pets div {
+    width: 120px;
+    margin: 5px;
+}
+#personal-features{
+    height: 80px;
+}
+#submit{
+    margin: 10px;
+    padding: 10px;
+}
+h1 {
+    margin: 5px;
+    padding: 5px;
+    line-height: 0.5;
+}
+p {
+    margin: 5px;
+    padding: 5px;
+    line-height: 0.5;
+    font-size: small;
+}
+fieldset{
+    margin: 10px;
+    padding: 10px;
+}
