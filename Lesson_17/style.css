@@ -1,0 +1,21 @@
+.grid-container {
+    display: grid;
+    width: 40%;
+    grid-template-columns: auto;
+}
+.grid-personal {
+    display: grid;
+    grid-template-columns: 100px 200px;
+    grid-column-gap: 10px;
+    margin: 10px;
+}
+.grid-menu {
+    display: grid;
+    grid-template-columns: 100px 100px;
+    grid-column-gap: 10px;
+    margin: 10px;
+}
+.delete{
+    color: red;
+    margin: 10px;
+}

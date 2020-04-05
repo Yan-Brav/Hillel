@@ -12,7 +12,9 @@
 }
 .grid-item-4{
     display: inline-grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 10px;
+    /*grid-template-columns: auto auto auto auto;*/
 }
 .contact-info{
     margin: 5px;
