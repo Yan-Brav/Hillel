@@ -166,11 +166,11 @@ window.addEventListener('load', function () {
                 let element = listView.listContainer.querySelector('#ol-list');
                 employees.forEach(function (item) {
                     let newLi = document.createElement('li');
-                    let newSpan = document.createElement('span');
+                    let newButton = document.createElement('button');
                     newLi.innerText = item.lastName;
-                    newSpan.innerText = '\u00D7';
-                    newSpan.className = 'delete';
-                    newLi.appendChild(newSpan);
+                    newButton.innerText = '\u00D7';
+                    newButton.className = 'delete';
+                    newLi.appendChild(newButton);
                     element.appendChild(newLi);
                 });
             }
@@ -181,12 +181,11 @@ window.addEventListener('load', function () {
 
             let listView = this.employee.viewList;
             let employee = this.employee;
-            this.employeeShow();
+            // this.employeeShow();
             let element = listView.listContainer.querySelector('.delete');
-            function deleteEmployee() {
-                // listView.createList();
-
-                let textElement = this.target.parentElement.innerText;
+            function deleteEmployee(e) {
+                listView.createList();
+                let textElement = e.target.parentElement.innerText;
                 employee.removeEmployee(textElement);
             }
             element.addEventListener('click', deleteEmployee);
@@ -200,7 +199,7 @@ window.addEventListener('load', function () {
     let controllerList = new listController(model);
     controllerForm.handleEmployeeAdd();
     controllerList.employeeShow();
-    controllerList.handleDeleteEmployee();
+    // controllerList.handleDeleteEmployee();
 });
 
 
