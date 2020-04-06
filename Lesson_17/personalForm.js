@@ -1,6 +1,5 @@
 window.addEventListener('load', function () {
     let employees = [];
-    // let formView = new PersonalFormView();
     class PersonalFormView {
         constructor () {
             this._container = document.querySelector('#container');
@@ -12,7 +11,6 @@ window.addEventListener('load', function () {
         createForm(){
             const formPersonalInfo = document.createElement('form');
             const fieldsetPersonalInfo = document.createElement('fieldset');
-            // const fieldsetMenu = document.createElement('fieldset');
             const divPersonalName = document.createElement('div');
             const divPersonalLastName = document.createElement('div');
             const divPersonalAge = document.createElement('div');
@@ -26,7 +24,6 @@ window.addEventListener('load', function () {
             //Attribute setting
             formPersonalInfo.id = 'personal-info';
             fieldsetPersonalInfo.setAttribute('form', 'personal-info');
-            // fieldsetMenu.setAttribute('form', 'personal-info');
             divPersonalName.id = 'personal-name';
             divPersonalName.className = 'grid-personal';
             divPersonalLastName.id = 'personal-lastName';
@@ -44,10 +41,10 @@ window.addEventListener('load', function () {
 
             inputAdd.id = 'add';
             inputAdd.setAttribute('type', 'button');
-            inputAdd.setAttribute('value', 'Добавить');
+            inputAdd.setAttribute('value', 'Add');
             inputShow.id = 'show';
             inputShow.setAttribute('type', 'button');
-            inputShow.setAttribute('value', 'Показать');
+            inputShow.setAttribute('value', 'Show');
 
             //InnerHTML
             fieldsetPersonalInfo.innerHTML = '<legend><b>Персональные данные</b></legend>';
@@ -80,12 +77,6 @@ window.addEventListener('load', function () {
         }
         get listContainer() {
             return this._container;
-        }
-        /*set listContainer(value) {
-            this._container = value;
-        }*/
-        setListContainer(value){
-            this._container = value;
         }
         createList() {
             const divList = document.createElement('div');
@@ -124,6 +115,9 @@ window.addEventListener('load', function () {
         addEmployees() {
             let person = this.createEmployee();
             employees.push(person);
+            this._formView.container.querySelector('#name').value = '';
+            this._formView.container.querySelector('#lastName').value = '';
+            this._formView.container.querySelector('#age').value = '';
             return employees;
         }
 
@@ -133,8 +127,25 @@ window.addEventListener('load', function () {
                     employees.splice(index, 1);
                 }
             });
-            this._listView.employeeShow();
-            // return employees;
+            console.log(employees);
+            let listView = this.viewList;
+            let employee = this;
+            let element = listView.listContainer.querySelector('#ol-list');
+            element.innerHTML = '';
+            employees.forEach(function (item) {
+                let newLi = document.createElement('li');
+                let newButton = document.createElement('button');
+                newLi.innerText = item.lastName;
+                newButton.innerText = '\u00D7';
+                newButton.className = 'delete';
+                newLi.appendChild(newButton);
+                element.appendChild(newLi);
+                function deleteEmployee(e) {
+                    let textElement = e.target.parentElement.innerText;
+                    employee.removeEmployee(textElement.slice(0,textElement.length-1));
+                }
+                newButton.addEventListener('click', deleteEmployee);
+            });
         }
     }
     class formController {
@@ -151,16 +162,15 @@ window.addEventListener('load', function () {
             }
             let buttonAdd = this.employee.viewForm.container.querySelector('#add');
             buttonAdd.addEventListener('click', addEmployee);
-
         }
     }
     class listController {
         constructor (employee) {
             this.employee = employee;
         }
-
         employeeShow() {
             let listView = this.employee.viewList;
+            let employee = this.employee;
             function showEmployeeList() {
                 listView.createList();
                 let element = listView.listContainer.querySelector('#ol-list');
@@ -172,23 +182,15 @@ window.addEventListener('load', function () {
                     newButton.className = 'delete';
                     newLi.appendChild(newButton);
                     element.appendChild(newLi);
+                    function deleteEmployee(e) {
+                        let textElement = e.target.parentElement.innerText;
+                        employee.removeEmployee(textElement.slice(0,textElement.length-1));
+                    }
+                    newButton.addEventListener('click', deleteEmployee);
                 });
             }
             let buttonShow = this.employee.viewForm.container.querySelector('#show');
             buttonShow.addEventListener('click', showEmployeeList);
-        }
-        handleDeleteEmployee() {
-
-            let listView = this.employee.viewList;
-            let employee = this.employee;
-            // this.employeeShow();
-            let element = listView.listContainer.querySelector('.delete');
-            function deleteEmployee(e) {
-                listView.createList();
-                let textElement = e.target.parentElement.innerText;
-                employee.removeEmployee(textElement);
-            }
-            element.addEventListener('click', deleteEmployee);
         }
     }
     let formView = new PersonalFormView();
@@ -199,7 +201,6 @@ window.addEventListener('load', function () {
     let controllerList = new listController(model);
     controllerForm.handleEmployeeAdd();
     controllerList.employeeShow();
-    // controllerList.handleDeleteEmployee();
 });
 
 
