@@ -2,6 +2,7 @@
     display: grid;
     width: 40%;
     grid-template-columns: auto;
+    position: absolute;
 }
 .grid-personal {
     display: grid;
@@ -18,4 +19,7 @@
 .delete{
     color: red;
     margin: 10px;
+}
+#ol-list {
+    display: inline-block;
 }
