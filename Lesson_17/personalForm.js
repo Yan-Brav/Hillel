@@ -1,5 +1,19 @@
 window.addEventListener('load', function () {
     let employees = [];
+    function init() {
+        formView.createForm();
+        controllerForm.handleEmployeeAdd();
+        controllerForm.handleEmployeeShow();
+    }
+    function toLocalStorage() {
+        let toLocalStorage =JSON.stringify(employees);
+        localStorage.setItem('empl', toLocalStorage);
+    }
+    function fromLocalStorage() {
+        let fromLocalStorage = localStorage.getItem('empl');
+        employees = JSON.parse(fromLocalStorage);
+    }
+
     class PersonalFormView {
         constructor () {
             this._container = document.querySelector('#container');
@@ -79,17 +93,24 @@ window.addEventListener('load', function () {
         }
         createList() {
             const divList = document.createElement('div');
+            const divBack = document.createElement('div');
             const olList = document.createElement('ol');
+            const buttonBack = document.createElement('button');
 
+            buttonBack.className = 'form-return';
+            buttonBack.innerText = 'Back';
             olList.id = 'ol-list';
             divList.id = 'personal-list';
+            divBack.appendChild(buttonBack);
             divList.appendChild(olList);
+            divList.appendChild(divBack);
 
             this.listContainer.innerHTML = '<h2>Список работников (фамилии)</h2>';
             this.listContainer.appendChild(divList);
         }
         renderList() {
                 let newOderList = this.listContainer.querySelector('#ol-list');
+                fromLocalStorage();
                 employees.forEach(function (item) {
                     let newLi = document.createElement('li');
                     let delButton = document.createElement('button');
@@ -198,25 +219,30 @@ window.addEventListener('load', function () {
         addEmployees() {
             let person = this.createEmployee();
             employees.push(person);
+            toLocalStorage();
             this._formView.container.querySelector('#name').value = '';
             this._formView.container.querySelector('#lastName').value = '';
             this._formView.container.querySelector('#age').value = '';
-            return employees;
         }
         employeeShow() {
             let listView = this.viewList;
             let employee = this;
             listView.createList();
+            let returnButton = listView.listContainer.querySelector('.form-return');
             let oderList = listView.renderList();
-                function deleteEditEmployee(e) {
-                    let textElement = e.target.parentElement.innerText;
-                    if (e.target.innerText === 'Edit'){
-                        employee.updateEmployee(textElement.slice(0, textElement.length - 5));
-                    }else {
-                        employee.removeEmployee(textElement.slice(0, textElement.length - 5));
-                    }
+            function deleteEditEmployee(e) {
+                let textElement = e.target.parentElement.innerText;
+                if (e.target.innerText === 'Edit'){
+                    employee.updateEmployee(textElement.slice(0, textElement.length - 5));
+                }else {
+                    employee.removeEmployee(textElement.slice(0, textElement.length - 5));
                 }
-                oderList.addEventListener('click', deleteEditEmployee);
+            }
+            oderList.addEventListener('click', deleteEditEmployee);
+            function returnForm() {
+                init();
+            }
+            returnButton.addEventListener('click', returnForm);
         }
         removeEmployee(lastName) {
             employees.forEach(function (item, index) {
@@ -224,7 +250,7 @@ window.addEventListener('load', function () {
                     employees.splice(index, 1);
                 }
             });
-            console.log(employees);
+            toLocalStorage();
             let listView = this.viewList;
             let orderList = listView.renderList();
             orderList.innerHTML = '';
@@ -232,7 +258,6 @@ window.addEventListener('load', function () {
         }
         updateEmployee(lastName) {
             let editView = this.viewEdit;
-            // let listView = this.viewList;
             let employee = this;
             editView.createEdit();
             employees.forEach(function (item) {
@@ -245,8 +270,6 @@ window.addEventListener('load', function () {
             function saveAfterEdit() {
                 employee.saveUpdatedEmployee(lastName);
                 employee.employeeShow();
-                /*listView.createList();
-                listView.renderList();*/
             }
             let buttonReady = this.viewEdit.editContainer.querySelector('#ready');
             buttonReady.addEventListener('click', saveAfterEdit);
@@ -266,61 +289,38 @@ window.addEventListener('load', function () {
                     employees.push(editingPerson);
                 }
             });
-            console.log(employees);
+            toLocalStorage();
         }
     }
     class formController {
         constructor (employee) {
             this.employee = employee;
         }
-
         handleEmployeeAdd() {
             let person = this.employee.createEmployee();
             let employee = this.employee;
             function addEmployee() {
                 employee.addEmployees(person);
-                console.log(employees);
             }
-            let buttonAdd = this.employee.viewForm.container.querySelector('#add');
+            let buttonAdd = employee.viewForm.container.querySelector('#add');
             buttonAdd.addEventListener('click', addEmployee);
-        }
-    }
-    class listController {
-        constructor (employee) {
-            this.employee = employee;
         }
         handleEmployeeShow() {
             let employee = this.employee;
             function showEmployeeList(){
                 employee.employeeShow();
             }
-            let buttonShow = this.employee.viewForm.container.querySelector('#show');
+            let buttonShow = employee.viewForm.container.querySelector('#show');
             buttonShow.addEventListener('click', showEmployeeList);
         }
-    }
-    class editController {
-        constructor (employee) {
-            this.employee = employee;
-        }
-        handleEmployeeEdit() {
-            let employee = this.employee;
-            function saveAfterEdit() {
-                employee.saveUpdatedEmployee();
-            }
-            let buttonReady = employee.viewEdit.editContainer.querySelector('#ready');
-            buttonReady.addEventListener('click', saveAfterEdit);
-        }
+
     }
     let formView = new PersonalFormView();
     let listView = new PersonalListView();
     let editView = new EditPersonalView();
-    formView.createForm();
     let model = new Employee(formView, listView, editView);
     let controllerForm = new formController(model);
-    let controllerList = new listController(model);
-    controllerForm.handleEmployeeAdd();
-    controllerList.handleEmployeeShow();
-    // controllerList.handleUpdateEmployee();
+    init();
 });
 
 
