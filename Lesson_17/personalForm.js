@@ -5,13 +5,6 @@ window.addEventListener('load', function () {
         controllerForm.handleEmployeeAdd();
         controllerForm.handleEmployeeShow();
     }
-    function toLocalStorage(employees) {
-        localStorage.setItem('empl', JSON.stringify(employees));
-    }
-    function fromLocalStorage() {
-        return JSON.parse(localStorage.getItem('empl')) || [];
-    }
-
     class PersonalFormView {
         constructor () {
             this._container = document.querySelector('#container');
@@ -89,6 +82,9 @@ window.addEventListener('load', function () {
         get listContainer() {
             return this._container;
         }
+        fromLocalStorage() {
+            return JSON.parse(localStorage.getItem('empl')) || [];
+        }
         createList() {
             const divList = document.createElement('div');
             const divBack = document.createElement('div');
@@ -108,7 +104,7 @@ window.addEventListener('load', function () {
         }
         renderList() {
                 let newOderList = this.listContainer.querySelector('#ol-list');
-                fromLocalStorage().forEach(function (item) {
+                this.fromLocalStorage().forEach(function (item) {
                     let newLi = document.createElement('li');
                     let delButton = document.createElement('button');
                     let editButton = document.createElement('button');
@@ -203,6 +199,9 @@ window.addEventListener('load', function () {
         get viewEdit() {
             return this._editView;
         }
+        toLocalStorage(employees) {
+            localStorage.setItem('empl', JSON.stringify(employees));
+        }
         createEmployee() {
             let fieldName = this._formView.container.querySelector('#name');
             let fieldLastName = this._formView.container.querySelector('#lastName');
@@ -215,9 +214,9 @@ window.addEventListener('load', function () {
         }
         addEmployees() {
             let person = this.createEmployee();
-            let employees = fromLocalStorage();
+            let employees = this.viewList.fromLocalStorage();
             employees.push(person);
-            toLocalStorage(employees);
+            this.toLocalStorage(employees);
             this._formView.container.querySelector('#name').value = '';
             this._formView.container.querySelector('#lastName').value = '';
             this._formView.container.querySelector('#age').value = '';
@@ -243,20 +242,20 @@ window.addEventListener('load', function () {
             returnButton.addEventListener('click', returnForm);
         }
         removeEmployee(lastName) {
-            let employees = fromLocalStorage();
+            let employees = this.viewList.fromLocalStorage();
             employees.forEach(function (item, index) {
                 if (item.lastName === lastName){
                     employees.splice(index, 1);
                 }
             });
-            toLocalStorage(employees);
+            this.toLocalStorage(employees);
             let listView = this.viewList;
             let orderList = listView.renderList();
             orderList.innerHTML = '';
             listView.renderList();
         }
         updateEmployee(lastName) {
-            let employees = fromLocalStorage();
+            let employees = this.viewList.fromLocalStorage();
             let editView = this.viewEdit;
             let employee = this;
             editView.createEdit();
@@ -275,7 +274,7 @@ window.addEventListener('load', function () {
             buttonReady.addEventListener('click', saveAfterEdit);
         }
         saveUpdatedEmployee(lastName) {
-            let employees = fromLocalStorage();
+            let employees = this.viewList.fromLocalStorage();
             let editView = this.viewEdit;
             let editingName = editView.editContainer.querySelector('#name').value;
             let editingLastName = editView.editContainer.querySelector('#lastName').value;
@@ -290,7 +289,7 @@ window.addEventListener('load', function () {
                     employees.push(editingPerson);
                 }
             });
-            toLocalStorage(employees);
+            this.toLocalStorage(employees);
         }
     }
     class formController {
