@@ -10,8 +10,8 @@ window.addEventListener('load', function () {
         localStorage.setItem('empl', toLocalStorage);
     }
     function fromLocalStorage() {
-        let fromLocalStorage = localStorage.getItem('empl');
-        employees = JSON.parse(fromLocalStorage);
+        // let fromLocalStorage =  ;
+        employees = JSON.parse(localStorage.getItem('empl')) || [];
     }
 
     class PersonalFormView {

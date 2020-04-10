@@ -1,8 +1,9 @@
 .grid-container {
     display: grid;
-    width: 40%;
+    width: 600px;
     grid-template-columns: auto;
-    position: absolute;
+    margin: 0 auto;
+    /*position: absolute;*/
 }
 .grid-personal {
     display: grid;
@@ -19,7 +20,18 @@
 .delete{
     color: red;
     margin: 10px;
+    height: 20px;
+}
+.edit {
+    height: 20px;
+    position: center;
+    margin: 10px;
 }
 #ol-list {
     display: inline-block;
 }
+#container {
+    display: block;
+}
+
+
