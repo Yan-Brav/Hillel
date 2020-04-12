@@ -86,6 +86,9 @@ window.addEventListener('load', function () {
             return JSON.parse(localStorage.getItem('empl')) || [];
         }
         createList() {
+            const formList = document.createElement('form');
+            const fieldset = document.createElement('fieldset');
+            const legend = document.createElement('legend');
             const divList = document.createElement('div');
             const divBack = document.createElement('div');
             const olList = document.createElement('ol');
@@ -98,9 +101,14 @@ window.addEventListener('load', function () {
             divBack.appendChild(buttonBack);
             divList.appendChild(olList);
             divList.appendChild(divBack);
+            legend.innerText = 'Работники';
+            formList.id = 'employee-list';
+            fieldset.appendChild(legend);
+            fieldset.appendChild(divList);
+            formList.appendChild(fieldset);
 
             this.listContainer.innerHTML = '<h2>Список работников (фамилии)</h2>';
-            this.listContainer.appendChild(divList);
+            this.listContainer.appendChild(formList);
         }
         renderList() {
                 let newOderList = this.listContainer.querySelector('#ol-list');
@@ -228,6 +236,7 @@ window.addEventListener('load', function () {
             let returnButton = listView.listContainer.querySelector('.form-return');
             let oderList = listView.renderList();
             function deleteEditEmployee(e) {
+                e.preventDefault();
                 let textElement = e.target.parentElement.innerText;
                 if (e.target.innerText === 'Edit'){
                     employee.updateEmployee(textElement.slice(0, textElement.length - 5));
@@ -236,7 +245,8 @@ window.addEventListener('load', function () {
                 }
             }
             oderList.addEventListener('click', deleteEditEmployee);
-            function returnForm() {
+            function returnForm(e) {
+                e.preventDefault();
                 init();
             }
             returnButton.addEventListener('click', returnForm);
@@ -285,8 +295,8 @@ window.addEventListener('load', function () {
                     editingPerson.name = editingName;
                     editingPerson.lastName = editingLastName;
                     editingPerson.age = editingAge;
-                    employees.splice(index, 1);
-                    employees.push(editingPerson);
+                    employees.splice(index, 1, editingPerson);
+                    // employees.push(editingPerson);
                 }
             });
             this.toLocalStorage(employees);

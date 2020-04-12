@@ -3,28 +3,21 @@
     width: 600px;
     grid-template-columns: auto;
     margin: 0 auto;
-    /*position: absolute;*/
 }
-.grid-personal {
+.grid-personal, .grid-menu {
     display: grid;
     grid-template-columns: 100px 200px;
     grid-column-gap: 10px;
     margin: 10px;
 }
 .grid-menu {
-    display: grid;
     grid-template-columns: 100px 100px;
-    grid-column-gap: 10px;
-    margin: 10px;
 }
 .delete{
     color: red;
-    margin: 10px;
-    height: 20px;
 }
-.edit {
+.edit, .delete {
     height: 20px;
-    position: center;
     margin: 10px;
 }
 #ol-list {
