@@ -111,7 +111,7 @@ window.addEventListener('load', function () {
             this.listContainer.appendChild(formList);
         }
         renderList() {
-                let newOderList = this.listContainer.querySelector('#ol-list');
+                const newOderList = this.listContainer.querySelector('#ol-list');
                 this.fromLocalStorage().forEach(function (item) {
                     const newLi = document.createElement('li');
                     const delButton = document.createElement('button');
@@ -128,9 +128,9 @@ window.addEventListener('load', function () {
                 return newOderList;
         }
     }
-    class EditPersonalView extends PersonalFormView{
+    class EditPersonalView{
         constructor () {
-            super();
+            // super();
             this._container = document.querySelector('#container');
         }
         get editContainer() {
@@ -178,17 +178,17 @@ window.addEventListener('load', function () {
             this._container.innerHTML = '<h2>Форма редактирования персональных данных</h2>';
 
             //Append
-            this.appendKids(divEditName, inputName);
-            this.appendKids(divEditLastName, inputLastName);
-            this.appendKids(divEditAge, inputAge);
-            this.appendKids(fieldsetEdit, divEditName);
-            this.appendKids(fieldsetEdit, divEditLastName);
-            this.appendKids(fieldsetEdit, divEditAge);
-            this.appendKids(divReady, inputReady);
-            this.appendKids(fieldsetEdit, divReady);
+            divEditName.appendChild(inputName);
+            divEditLastName.appendChild(inputLastName);
+            divEditAge.appendChild(inputAge);
+            fieldsetEdit.appendChild(divEditName);
+            fieldsetEdit.appendChild(divEditLastName);
+            fieldsetEdit.appendChild(divEditAge);
+            divReady.appendChild(inputReady);
+            fieldsetEdit.appendChild(divReady);
 
-            this.appendKids(formEdit, fieldsetEdit);
-            this.appendKids(this._container, formEdit);
+            formEdit.appendChild(fieldsetEdit);
+            this._container.appendChild(formEdit);
         }
 
     }
@@ -291,7 +291,7 @@ window.addEventListener('load', function () {
             const editingAge = editView.editContainer.querySelector('#age').value;
             employees.forEach(function (item, index) {
                 if (lastName === item.lastName) {
-                    let editingPerson = {};
+                    const editingPerson = {};
                     editingPerson.name = editingName;
                     editingPerson.lastName = editingLastName;
                     editingPerson.age = editingAge;
@@ -322,7 +322,6 @@ window.addEventListener('load', function () {
             const buttonShow = employee.viewForm.container.querySelector('#show');
             buttonShow.addEventListener('click', showEmployeeList);
         }
-
     }
     const formView = new PersonalFormView();
     const listView = new PersonalListView();
