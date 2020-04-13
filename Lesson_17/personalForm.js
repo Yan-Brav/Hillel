@@ -130,7 +130,6 @@ window.addEventListener('load', function () {
     }
     class EditPersonalView{
         constructor () {
-            // super();
             this._container = document.querySelector('#container');
         }
         get editContainer() {
