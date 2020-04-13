@@ -113,9 +113,9 @@ window.addEventListener('load', function () {
         renderList() {
                 let newOderList = this.listContainer.querySelector('#ol-list');
                 this.fromLocalStorage().forEach(function (item) {
-                    let newLi = document.createElement('li');
-                    let delButton = document.createElement('button');
-                    let editButton = document.createElement('button');
+                    const newLi = document.createElement('li');
+                    const delButton = document.createElement('button');
+                    const editButton = document.createElement('button');
                     newLi.innerText = item.lastName;
                     delButton.innerText = '\u00D7';
                     delButton.className = 'delete';
@@ -211,9 +211,9 @@ window.addEventListener('load', function () {
             localStorage.setItem('empl', JSON.stringify(employees));
         }
         createEmployee() {
-            let fieldName = this._formView.container.querySelector('#name');
-            let fieldLastName = this._formView.container.querySelector('#lastName');
-            let fieldAge = this._formView.container.querySelector('#age');
+            const fieldName = this._formView.container.querySelector('#name');
+            const fieldLastName = this._formView.container.querySelector('#lastName');
+            const fieldAge = this._formView.container.querySelector('#age');
             return {
                 name: fieldName.value,
                 lastName: fieldLastName.value,
@@ -221,8 +221,8 @@ window.addEventListener('load', function () {
             };
         }
         addEmployees() {
-            let person = this.createEmployee();
-            let employees = this.viewList.fromLocalStorage();
+            const person = this.createEmployee();
+            const employees = this.viewList.fromLocalStorage();
             employees.push(person);
             this.toLocalStorage(employees);
             this._formView.container.querySelector('#name').value = '';
@@ -230,14 +230,14 @@ window.addEventListener('load', function () {
             this._formView.container.querySelector('#age').value = '';
         }
         employeeShow() {
-            let listView = this.viewList;
-            let employee = this;
+            const listView = this.viewList;
+            const employee = this;
             listView.createList();
-            let returnButton = listView.listContainer.querySelector('.form-return');
-            let oderList = listView.renderList();
+            const returnButton = listView.listContainer.querySelector('.form-return');
+            const oderList = listView.renderList();
             function deleteEditEmployee(e) {
                 e.preventDefault();
-                let textElement = e.target.parentElement.innerText;
+                const textElement = e.target.parentElement.innerText;
                 if (e.target.innerText === 'Edit'){
                     employee.updateEmployee(textElement.slice(0, textElement.length - 5));
                 }else {
@@ -252,22 +252,22 @@ window.addEventListener('load', function () {
             returnButton.addEventListener('click', returnForm);
         }
         removeEmployee(lastName) {
-            let employees = this.viewList.fromLocalStorage();
+            const employees = this.viewList.fromLocalStorage();
             employees.forEach(function (item, index) {
                 if (item.lastName === lastName){
                     employees.splice(index, 1);
                 }
             });
             this.toLocalStorage(employees);
-            let listView = this.viewList;
-            let orderList = listView.renderList();
+            const listView = this.viewList;
+            const orderList = listView.renderList();
             orderList.innerHTML = '';
             listView.renderList();
         }
         updateEmployee(lastName) {
-            let employees = this.viewList.fromLocalStorage();
-            let editView = this.viewEdit;
-            let employee = this;
+            const employees = this.viewList.fromLocalStorage();
+            const editView = this.viewEdit;
+            const employee = this;
             editView.createEdit();
             employees.forEach(function (item) {
                 if (item.lastName === lastName){
@@ -280,15 +280,15 @@ window.addEventListener('load', function () {
                 employee.saveUpdatedEmployee(lastName);
                 employee.employeeShow();
             }
-            let buttonReady = this.viewEdit.editContainer.querySelector('#ready');
+            const buttonReady = this.viewEdit.editContainer.querySelector('#ready');
             buttonReady.addEventListener('click', saveAfterEdit);
         }
         saveUpdatedEmployee(lastName) {
-            let employees = this.viewList.fromLocalStorage();
-            let editView = this.viewEdit;
-            let editingName = editView.editContainer.querySelector('#name').value;
-            let editingLastName = editView.editContainer.querySelector('#lastName').value;
-            let editingAge = editView.editContainer.querySelector('#age').value;
+            const employees = this.viewList.fromLocalStorage();
+            const editView = this.viewEdit;
+            const editingName = editView.editContainer.querySelector('#name').value;
+            const editingLastName = editView.editContainer.querySelector('#lastName').value;
+            const editingAge = editView.editContainer.querySelector('#age').value;
             employees.forEach(function (item, index) {
                 if (lastName === item.lastName) {
                     let editingPerson = {};
@@ -296,7 +296,6 @@ window.addEventListener('load', function () {
                     editingPerson.lastName = editingLastName;
                     editingPerson.age = editingAge;
                     employees.splice(index, 1, editingPerson);
-                    // employees.push(editingPerson);
                 }
             });
             this.toLocalStorage(employees);
@@ -307,29 +306,29 @@ window.addEventListener('load', function () {
             this.employee = employee;
         }
         handleEmployeeAdd() {
-            let person = this.employee.createEmployee();
-            let employee = this.employee;
+            const person = this.employee.createEmployee();
+            const employee = this.employee;
             function addEmployee() {
                 employee.addEmployees(person);
             }
-            let buttonAdd = employee.viewForm.container.querySelector('#add');
+            const buttonAdd = employee.viewForm.container.querySelector('#add');
             buttonAdd.addEventListener('click', addEmployee);
         }
         handleEmployeeShow() {
-            let employee = this.employee;
+            const employee = this.employee;
             function showEmployeeList(){
                 employee.employeeShow();
             }
-            let buttonShow = employee.viewForm.container.querySelector('#show');
+            const buttonShow = employee.viewForm.container.querySelector('#show');
             buttonShow.addEventListener('click', showEmployeeList);
         }
 
     }
-    let formView = new PersonalFormView();
-    let listView = new PersonalListView();
-    let editView = new EditPersonalView();
-    let model = new Employee(formView, listView, editView);
-    let controllerForm = new formController(model);
+    const formView = new PersonalFormView();
+    const listView = new PersonalListView();
+    const editView = new EditPersonalView();
+    const model = new Employee(formView, listView, editView);
+    const controllerForm = new formController(model);
     init();
 });
 
