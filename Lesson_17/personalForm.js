@@ -196,6 +196,7 @@ window.addEventListener('load', function () {
             this._formView = formView;
             this._listView = listView;
             this._editView = editView;
+            this.counter = parseInt(localStorage.getItem('empl-id')) || 0;
         }
         get viewForm() {
             return this._formView;
@@ -213,13 +214,16 @@ window.addEventListener('load', function () {
             const fieldName = this._formView.container.querySelector('#name');
             const fieldLastName = this._formView.container.querySelector('#lastName');
             const fieldAge = this._formView.container.querySelector('#age');
+            // this.counter++;
             return {
+                id: this.counter,
                 name: fieldName.value,
                 lastName: fieldLastName.value,
                 age: fieldAge.value
             };
         }
         addEmployees() {
+            this.counter++;
             const person = this.createEmployee();
             const employees = this.viewList.fromLocalStorage();
             employees.push(person);
@@ -227,6 +231,7 @@ window.addEventListener('load', function () {
             this._formView.container.querySelector('#name').value = '';
             this._formView.container.querySelector('#lastName').value = '';
             this._formView.container.querySelector('#age').value = '';
+            localStorage.setItem('empl-id', this.counter);
         }
         employeeShow() {
             const listView = this.viewList;
@@ -288,9 +293,11 @@ window.addEventListener('load', function () {
             const editingName = editView.editContainer.querySelector('#name').value;
             const editingLastName = editView.editContainer.querySelector('#lastName').value;
             const editingAge = editView.editContainer.querySelector('#age').value;
+            const counter = this.counter;
             employees.forEach(function (item, index) {
                 if (lastName === item.lastName) {
                     const editingPerson = {};
+                    editingPerson.id = counter;
                     editingPerson.name = editingName;
                     editingPerson.lastName = editingLastName;
                     editingPerson.age = editingAge;
@@ -321,6 +328,9 @@ window.addEventListener('load', function () {
             const buttonShow = employee.viewForm.container.querySelector('#show');
             buttonShow.addEventListener('click', showEmployeeList);
         }
+    }
+    class GlobalController {
+
     }
     const formView = new PersonalFormView();
     const listView = new PersonalListView();
