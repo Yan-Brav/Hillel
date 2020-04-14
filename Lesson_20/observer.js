@@ -27,8 +27,23 @@ class SubsAddContr {
         button.addEventListener('click', addBlock);
     }
 }
-const inputText = document.querySelector('#message');
+class NotificationController {
+    constructor (observer) {
+        this.observer = observer;
+    }
+    notifyAll() {
+        const observer = this.observer;
+        const inputText = document.querySelector('input[type=text]');
+        function notify() {
+            observer.broadcast(inputText.value);
+        }
+        inputText.addEventListener('input', notify);
+    }
+}
+
 const observer = new Observer();
-const controller = new SubsAddContr(observer);
-controller.addSubscriber();
-inputText.addEventListener('input', () => observer.broadcast(inputText.value));
+const subsController = new SubsAddContr(observer);
+const notifyController = new NotificationController(observer);
+subsController.addSubscriber();
+notifyController.notifyAll();
+
