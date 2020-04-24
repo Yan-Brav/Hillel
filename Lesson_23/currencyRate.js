@@ -6,17 +6,21 @@ window.addEventListener('load', function () {
 
     async function getSelected() {
         const selectedValue = select.options[select.selectedIndex].value;
-        async function foo() {
-            const data = await fetch(requestURL);
-            const result = await data.json();
-            for (let currency of result) {
-                if (currency.ccy === selectedValue) {
-                    paragraph.innerText = `${currency.ccy}:
+        async function selectCurrency() {
+            try {
+                const data = await fetch(requestURL);
+                const result = await data.json();
+                for (let currency of result) {
+                    if (currency.ccy === selectedValue) {
+                        paragraph.innerText = `${currency.ccy}:
                                             buy ${currency.buy * 1 } UAH / sale ${currency.sale * 1} UAH`
+                    }
                 }
+            } catch (e) {
+                paragraph.innerText = 'Something wrong';
             }
         }
-        await foo();
+        await selectCurrency();
     }
     select.addEventListener('change', getSelected);
 });
