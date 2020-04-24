@@ -12,7 +12,7 @@ window.addEventListener('load', function () {
             for (let currency of result) {
                 if (currency.ccy === selectedValue) {
                     paragraph.innerText = `${currency.ccy}:
-                                            sale ${currency.buy * 1 } UAH / buy ${currency.sale * 1} UAH`
+                                            buy ${currency.buy * 1 } UAH / sale ${currency.sale * 1} UAH`
                 }
             }
         }
