@@ -17,4 +17,3 @@ function sortArrayByOdd(array) {
     return array;
 }
 console.log(sortArrayByOdd(array));
-
