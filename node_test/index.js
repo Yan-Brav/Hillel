@@ -53,3 +53,20 @@ console.log(os.totalmem());
 console.log(os.homedir());
 console.log(os.userInfo());
 console.log(os.uptime()/60);*/
+
+/*const server = http.createServer((req, res) => {
+    if (req.method === 'GET') {
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        console.log(req.url);
+        res.write(req.url);
+        res.write(`<h1>Getting users</h1>
+                <form method="get" action="/">
+                    <button type="submit">Get users</button>
+                    <div>
+                        <p></p>
+                    </div>
+                </form>`);
+        res.end();
+    }
+});
+server.listen(3000, () => console.log('Server is running'));*/
