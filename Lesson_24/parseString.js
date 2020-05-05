@@ -27,4 +27,4 @@ function parse(cmd) {
     }
     return numArray;
 }
-console.log(parse('iIhhuOyssssbOsss'));
+console.log(parse('iiisdofs'));
