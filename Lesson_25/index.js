@@ -1,17 +1,20 @@
 let express = require('express');
-const fs = require('fs');
 const path = require('path');
+const request = require('request-promise');
+const options = {
+    method: 'GET',
+    uri: 'https://jsonplaceholder.typicode.com/users',
+    json: true
+};
 
 let app = express();
 app.use(express.static(path.join(__dirname, 'public')));
-fs.readFile(path.join(__dirname, 'public', 'index.html'), 'utf-8',
-    (err, data) => {
-    if (err) {
-        throw new Error(err);
-    }else {
-        app.get('/', (req, res) => {
-            res.send(data);
-            });
-        }
+app.get('/', (req, res) => {
+    res.sendFile(path.join('index.html'));
+});
+app.get('/users', (req, res) => {
+    request(options)
+        .then((data) => res.send(data))
+        .catch((err) => new Error(err))
 });
 app.listen(3333, () => console.log('Server is running'));

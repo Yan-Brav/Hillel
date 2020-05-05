@@ -2,7 +2,7 @@
 window.addEventListener('load', function () {
     const button = document.querySelector('button');
     const p = document.querySelector('p');
-    const requestURL = 'https://jsonplaceholder.typicode.com/users';
+    const requestURL = 'http://localhost:3333/users';
 
     async function getUsers() {
         try {
