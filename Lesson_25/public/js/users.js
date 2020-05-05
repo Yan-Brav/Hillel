@@ -1,7 +1,6 @@
 'use strict';
 window.addEventListener('load', function () {
     const button = document.querySelector('button');
-    // const p = document.querySelector('p');
     const div = document.querySelector('div');
     const usersList = document.createElement('ol');
     const requestURL = 'http://localhost:3333/users';
