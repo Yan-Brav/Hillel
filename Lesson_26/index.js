@@ -1,11 +1,9 @@
 const express = require('express');
-/*const fs = require('fs');
-const path = require('path');*/
 const bodyParser = require('body-parser');
 let MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
 
-let app = express(); //creating server
+let app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 let db;
@@ -107,47 +105,3 @@ client.connect(err => {
     app.listen(3333, () => console.log('Server is running...'));
     // client.close();
 });
-
-
-
-
-/*let students = [{
-    id:1,
-    name: 'Max',
-    surname: 'Petrov',
-    age: 100
-},{
-    id:2,
-    name: 'Serg',
-    surname: 'Ivanov',
-    age: 50
-}];
-
-app.get('/', (req, res) => res.send('Hello Express'));
-
-app.get('/students', (req, res) => res.send(students));
-app.get('/students/:id', (req, res) => {
-    let student = students.find(student => student.id === Number(req.params.id));
-    res.send(student);
-});
-app.post('/students', (req, res) => {
-    console.log(req.body);
-    let student = {
-        id: Date.now(),
-        name: req.body.name
-    };
-    students.push(student);
-    res.send(student);
-});
-app.put('/students/:id', (req, res) => {
-    let student = students.find(student => student.id === Number(req.params.id));
-        student.name =  req.body.name;
-        res.sendStatus(200);
-});
-app.delete('/students/:id', (req, res) => {
-    students = students.filter(student => student.id !== Number(req.params.id))
-    res.sendStatus(200);
-});
-app.listen(3333, () => console.log('Server running...'));*/
-
-
